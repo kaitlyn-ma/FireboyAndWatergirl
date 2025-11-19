@@ -22,7 +22,27 @@ public class FireboyAndWatergirl {
        @return int array of size 2 representing row and column of the end coordinate if path is found, null otherwise
      */
     public static void nextStep(char[][] maze, int row, int col, boolean[][] collectedDiamonds, int hero) {
-        //WRITE YOUR CODE HERE
+        if (row >= 0 && row < maze.length && col >= 0 && col < maze[row].length) {
+            if (!collectedDiamonds[row][col]){
+                if (hero == FIREBOY && (maze[row][col] == 'F' || maze[row][col] == 'N')){
+                    collectedDiamonds[row][col] = true;
+                    nextStep(maze, row+1, col, collectedDiamonds, hero);
+                    nextStep(maze, row, col-1, collectedDiamonds, hero);
+                    nextStep(maze, row-1, col, collectedDiamonds, hero);
+                    nextStep(maze, row, col+1, collectedDiamonds, hero);
+                }
+                else if (hero == WATERGIRL && (maze[row][col] == 'W' || maze[row][col] == 'N')){
+                    collectedDiamonds[row][col] = true;
+                    nextStep(maze, row+1, col, collectedDiamonds, hero);
+                    nextStep(maze, row, col-1, collectedDiamonds, hero);
+                    nextStep(maze, row-1, col, collectedDiamonds, hero);
+                    nextStep(maze, row, col+1, collectedDiamonds, hero);
+                }
+                else{
+                    return;
+                }
+            }
+        }
     }
 
     public static void main(String[] args)
